@@ -8,6 +8,7 @@
  + Run ~$container exec -it orbslam3 bash~
    + Replace $container with your preferred runtime, probably docker or podman
  + Run ~./Examples/Monocular/mono_replica Vocabulary/ORBvoc.txt Examples/Monocular/Replica.yml /Datasets/Replica/apartment_1 /Datasets/Replica/apartment_1/times.txt~
+   + TODO add support for RGB-D and maybe stereo?
 
 ** Building Replica for ~ORB_SLAM3~
 + Download the dataset meshes with ~cd <repo-root>/Replica && ./download.sh <output-dir>~
