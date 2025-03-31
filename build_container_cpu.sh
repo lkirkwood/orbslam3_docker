@@ -44,7 +44,14 @@ $runtime run -td --privileged --net=host --ipc=host \
     -v `pwd`/Datasets:/Datasets \
     docker.io/jahaniam/orbslam3:ubuntu20_noetic_cpu bash
 
-# Git pull orbslam and compile
+# Compile ORB_SLAM3
+echo "============================"
+echo "|    Compiling orbslam3    |"
+echo "============================"
 $runtime exec -it orbslam3 bash -i -c "cd /ORB_SLAM3 && chmod +x build.sh && ./build.sh "
-# Compile ORBSLAM3-ROS
-$runtime exec -it orbslam3 bash -i -c "echo 'ROS_PACKAGE_PATH=/opt/ros/noeti/share:/ORB_SLAM3/Examples/ROS'>>~/.bashrc && source ~/.bashrc && cd /ORB_SLAM3 && chmod +x build_ros.sh && ./build_ros.sh"
+
+# Compile Replica
+echo "==============================="
+echo "|    Compiling replica sdk    |"
+echo "==============================="
+$runtime exec -it orbslam3 bash -i -c "cd /Replica && chmod +x build.sh && ./build.sh "
