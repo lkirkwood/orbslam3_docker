@@ -1,0 +1,25 @@
+#+title: Orbslam Replica
+#+options: title:nil toc:nil
+
+* Instructions
++ Pull fork from [[https://github.com/lkirkwood/orbslam3_docker][here]]
+  + Make sure to pull recursively with ~git clone --recursive~, or run ~git submodule update --init~ after a normal clone.
++ Run ~./build_container_cpu.sh~
++ Place your datasets in ~Datasets~, see below
++ Run ~$container exec -it orbslam3 bash~
+  + Replace $container with your preferred runtime, probably docker or podman
++ Run ~./Examples/Monocular/mono_replica Vocabulary/ORBvoc.txt Examples/Monocular/Replica.yml /Datasets/Replica/apartment_1 /Datasets/Replica/apartment_1/times.txt~
+
+** Building Replica for ~ORB_SLAM3~
++ Download the dataset meshes with ~cd <repo-root>/Replica && ./download.sh replica_v1~
+  + TODO find out how to just download one scene.
+
++ Render the dataset into RGB and depth images. Note that the fork of the replica renderer is tweaked specifically for the apartment_0 scene.
+  + TODO add support for configurable path and start position
+
+  + ~cd <repo-root>/Datasets && mkdir apartment_1 && cd apartment_1~
+    + The renderer will output ~frameXXXX.jpg~ and ~depthXXXX.png~ files in your current directory, so be aware of that. Best to enter the final directory up front, as above.
+    + TODO add support for configurable output dir
+
+  + ~ReplicaRenderer <apt-1-meshes-dir>/mesh.ply <apt-1-meshes-dir>/textures~
+    + The ~ReplicaRenderer~ binary is in ~<repo-root>/Replica/build/ReplicaSDK/~ *after* running the container build script. Leading path in the command above omitted for brevity.
