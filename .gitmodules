@@ -1,0 +1,3 @@
+[submodule "Datasets/Replica"]
+	path = Datasets/Replica
+	url = git@github.com:lkirkwood/Replica-Dataset.git
