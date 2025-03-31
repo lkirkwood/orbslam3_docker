@@ -1,5 +1,5 @@
 [submodule "Datasets/Replica"]
-	path = Datasets/Replica
+	path = Replica
 	url = git@github.com:lkirkwood/Replica-Dataset.git
 [submodule "ORB_SLAM3"]
 	path = ORB_SLAM3
