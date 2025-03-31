@@ -40,6 +40,7 @@ $runtime run -td --privileged --net=host --ipc=host \
     --cap-add=SYS_PTRACE \
     -v /etc/group:/etc/group:ro \
     -v `pwd`/ORB_SLAM3:/ORB_SLAM3 \
+    -v `pwd`/Replica:/Replica \
     -v `pwd`/Datasets:/Datasets \
     docker.io/jahaniam/orbslam3:ubuntu20_noetic_cpu bash
 
