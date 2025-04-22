@@ -1,0 +1,27 @@
+{
+  "stages": {
+    "configs": [
+      {
+        "template_handle": "apartment_1_stage",
+        "attributes": {
+            "render_asset": "apartment_1/habitat/mesh_preseg_semantic.ply",
+            "semantic_asset": "apartment_1/habitat/mesh_preseg_semantic.ply",
+            "navmesh_asset": "apartment_1/habitat/mesh_semantic.navmesh",
+            "semantic_scene_instance": "apartment_1_ssd",
+            "requires_lighting": true
+        }
+      }
+    ]
+  },
+  "scene_instances": {
+    "paths": {
+      ".json": ["apartment_1/habitat"]
+    }
+  },
+  "semantic_scene_descriptor_instances": {
+    "apartment_1_ssd": "apartment_1/habitat/info_preseg_semantic.json"
+  },
+  "navmesh_instances": {
+    "apartment_1_navmesh": "apartment_1/habitat/mesh_semantic.navmesh"
+  }
+}

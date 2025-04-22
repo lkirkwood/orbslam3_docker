@@ -1,0 +1,10 @@
+{
+  "stage_instance": {
+    "template_name": "apartment_1_stage"
+  },
+  "default_lighting": "no_lights",
+  "semantic_scene_instance": "apartment_1_ssd",
+  "navmesh_instance": "apartment_1_navmesh",
+  "object_instances": [],
+  "articulated_object_instances": []
+}

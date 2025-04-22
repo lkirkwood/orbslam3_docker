@@ -1,2 +1,9 @@
 Datasets/*
-ORB_SLAM3/*
+!Datasets/Replica/
+Datasets/Replica/*
+!Datasets/Replica/scene_dataset_config.json
+!Datasets/Replica/apartment_1/
+Datasets/Replica/apartment_1/*
+!Datasets/Replica/apartment_1/habitat/
+Datasets/Replica/apartment_1/habitat/*
+!Datasets/Replica/apartment_1/habitat/apartment_1.scene_instance.json
