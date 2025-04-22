@@ -24,10 +24,8 @@ xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 
 xhost +local:$runtime
 
-$runtime pull docker.io/jahaniam/orbslam3:ubuntu20_noetic_cpu
-
-# Remove existing container
 $runtime rm -f orbslam3 &>/dev/null
+$runtime build -t orbslam3-habsim -f habsim.Containerfile .
 
 # Create a new container
 $runtime run -td --privileged --net=host --ipc=host \
@@ -41,8 +39,9 @@ $runtime run -td --privileged --net=host --ipc=host \
     -v /etc/group:/etc/group:ro \
     -v `pwd`/ORB_SLAM3:/ORB_SLAM3 \
     -v `pwd`/Replica:/Replica \
+    -v `pwd`/habitat-sim:/habitat-sim \
     -v `pwd`/Datasets:/Datasets \
-    docker.io/jahaniam/orbslam3:ubuntu20_noetic_cpu bash
+    orbslam3-habsim bash
 
 # Compile ORB_SLAM3
 echo "============================"
@@ -55,3 +54,11 @@ echo "==============================="
 echo "|    Compiling replica sdk    |"
 echo "==============================="
 $runtime exec -it orbslam3 bash -i -c "cd /Replica && chmod +x build.sh && ./build.sh "
+
+# Install habitat-sim
+echo "==============================="
+echo "|    Compiling habitat-sim    |"
+echo "==============================="
+$runtime exec -it orbslam3 bash -i -c 'cd /habitat-sim && . /.habsim-venv/bin/activate && \
+  export CXXFLAGS="-I$(uv python dir)/$(ls $(uv python dir))/include/python3.9" && \
+  ./build.sh -j4'
