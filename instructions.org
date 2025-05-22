@@ -7,7 +7,8 @@
  + Place or build your dataset in ~Datasets~, see below
  + Run ~$container exec -it orbslam3 bash~
    + Replace $container with your preferred runtime, probably docker or podman
- + Run ~./Examples/Monocular/mono_replica Vocabulary/ORBvoc.txt Examples/Monocular/Replica.yml /Datasets/Replica/apartment_1 /Datasets/Replica/apartment_1/times.txt~
+ + Enter ~/ORB_SLAM3~
+ + Run ~./Examples/Monocular/mono_replica Vocabulary/ORBvoc.txt Examples/Monocular/Replica.yml /Datasets/habsim-Replica/apartment_1 /Datasets/hasbim-Replica/apartment_1/rgb-timestamps~
    + TODO add support for RGB-D and maybe stereo?
 
 ** Building Replica for ~ORB_SLAM3~
@@ -23,3 +24,22 @@
 
   + ~ReplicaRenderer <apt-1-meshes-dir>/mesh.ply <apt-1-meshes-dir>/textures~
     + The ~ReplicaRenderer~ binary is in ~<repo-root>/Replica/build/ReplicaSDK/~ *after* running the container build script. Leading path in the command above omitted for brevity.
+
+** Rendering a path through a Replica scene
++ The python script at ~/render-replica-frames.py~ inside the container will render a path through the scene.
+  + The script will generate rgb and depth images inside ~/Datasets/habsim-Replica/~
+  + It will also output ground-truth trajectory files in both EuRoC and TUM formats in that same directory
+
+** Running ORB_SLAM3 on the rendered images
++ Run either ~rgb_demo.sh~ or ~depth_demo.sh~ in the ORB_SLAM3 repo.
+  + The rgb demo outputs trajectory files in EuRoC format annoyingly and there doesn't seem to be an obvious/easy way to get it to do TUM so be aware of that
+  + The depth demo outputs TUM trajectory files
+  + By default the trajectory files go into CameraTrajectory.txt in the ORB_SLAM3 repo
+** Running evo on the outputs
++ ~evo_traj euroc --ref /Datasets/habsim-Replica/euroc-positions /ORB_SLAM3/CameraTrajectory.txt -p -a~
+  + Align and plot the EuRoC trajectory from rgb demo
++ ~evo_traj tum --ref /Datasets/habsim-Replica/tum-positions /ORB_SLAM3/CameraTrajectory.txt -p -a~
+  + Align and plot the TUM trajectory from depth demo
++ ~evo_ape tum --ref /Datasets/habsim-Replica/tum-positions /ORB_SLAM3/CameraTrajectory.txt -p -a --correct_scale~
+  + Align, correct scale, and plot APE over time.
+    + Best to use depth trajectory here, EuRoC has funny issues with evo and I haven't worked it out yet
