@@ -98,6 +98,8 @@ rgb_timestamps = []
 depth_timestamps = []
 positions = []
 
+TIMESCALE = 10**9
+
 
 def observe(frame: int):
     obs = sim.get_sensor_observations()
@@ -124,7 +126,7 @@ def observe(frame: int):
         state.rotation.z,
         state.rotation.w,
     )
-    positions.append(f"{i:03d} {tx} {ty} {tz} {qx} {qy} {qz} {qw}\n")
+    positions.append(f"{cur_time * TIMESCALE:03f} {tx} {ty} {tz} {qx} {qy} {qz} {qw}\n")
 
 
 agent = sim.get_agent(0)
