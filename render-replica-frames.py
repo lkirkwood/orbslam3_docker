@@ -96,9 +96,10 @@ ty = -1.6
 # Walk path and observe #########################################################
 rgb_timestamps = []
 depth_timestamps = []
-positions = []
+euroc_positions = []
+tum_positions = []
 
-TIMESCALE = 10**9
+EUROC_TIMESCALE = 10**9
 
 
 def observe(frame: int):
@@ -126,7 +127,10 @@ def observe(frame: int):
         state.rotation.z,
         state.rotation.w,
     )
-    positions.append(f"{cur_time * TIMESCALE:03f} {tz} {ty} {tx} {qx} {qy} {qz} {qw}\n")
+    euroc_positions.append(
+        f"{cur_time * EUROC_TIMESCALE:03f},{tz},{ty},{tx},{qx},{qy},{qz},{qw}\n"
+    )
+    tum_positions.append(f"{timestamp} {tz} {ty} {tx} {qx} {qy} {qz} {qw}\n")
 
 
 agent = sim.get_agent(0)
@@ -200,8 +204,11 @@ with open(f"{output_dir}/rgb-timestamps", "w") as stream:
 with open(f"{output_dir}/depth-timestamps", "w") as stream:
     stream.writelines(depth_timestamps)
 
-with open(f"{output_dir}/positions", "w") as stream:
-    stream.writelines(positions)
+with open(f"{output_dir}/euroc-positions", "w") as stream:
+    stream.writelines(euroc_positions)
+
+with open(f"{output_dir}/tum-positions", "w") as stream:
+    stream.writelines(tum_positions)
 
 print()
 print(f"Rendered {len(path_points) + extra_steps} frames, with seed {seed}")
