@@ -8,7 +8,6 @@ import quaternion
 import imageio
 import os
 import shutil
-from math import ceil
 
 scene_config_file = "/Datasets/Replica/scene_dataset_config.json"
 output_dir = "/Datasets/habsim-Replica"
