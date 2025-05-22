@@ -126,7 +126,7 @@ def observe(frame: int):
         state.rotation.z,
         state.rotation.w,
     )
-    positions.append(f"{cur_time * TIMESCALE:03f} {tx} {ty} {tz} {qx} {qy} {qz} {qw}\n")
+    positions.append(f"{cur_time * TIMESCALE:03f} {tz} {ty} {tx} {qx} {qy} {qz} {qw}\n")
 
 
 agent = sim.get_agent(0)
