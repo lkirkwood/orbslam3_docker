@@ -26,13 +26,13 @@ def make_cfg() -> habitat_sim.Configuration:
     rgb_sensor = habitat_sim.CameraSensorSpec()
     rgb_sensor.uuid = "rgb_sensor"
     rgb_sensor.sensor_type = habitat_sim.SensorType.COLOR
-    rgb_sensor.resolution = [1280, 960]
+    rgb_sensor.resolution = [960, 1280]
     rgb_sensor.position = [0.0, 1.5, 0.0]
 
     depth_sensor = habitat_sim.CameraSensorSpec()
     depth_sensor.uuid = "depth_sensor"
     depth_sensor.sensor_type = habitat_sim.SensorType.DEPTH
-    depth_sensor.resolution = [1280, 960]
+    depth_sensor.resolution = [960, 1280]
     depth_sensor.position = [0.0, 1.5, 0.0]
 
     agent_cfg = habitat_sim.agent.AgentConfiguration()
